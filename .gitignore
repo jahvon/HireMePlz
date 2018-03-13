@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.flaskenv
+flaskenv/
+venv/
+ENV/
+*.pyc
+*.pyo
+env/
+env*
+dist/
+build/
+.cache/
+.pytest_cache/
