@@ -13,7 +13,7 @@
   </head>
   <body>
     <div id="header">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #23212E;">
         <a class="navbar-brand" href="#">HireMePLZ</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -34,10 +34,5 @@
       </nav>
     </div>
     <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer">
-      {% block footer %}
-        <center>&copy; Copyright 2018 by CS1530 Group 9<center>
-      {% endblock %}
-    </div>
   </body>
 </html>
