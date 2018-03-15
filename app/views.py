@@ -4,3 +4,7 @@ from app import app
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/jobs')
+def jobs():
+    return render_template('jobs.html')

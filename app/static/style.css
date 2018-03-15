@@ -20,6 +20,7 @@ body {
 }
 
 .full-right{
+  background-color: #FAFAFA;
   height: 100vh;
   width: 50%;
   top: 0;
@@ -28,4 +29,83 @@ body {
   z-index: -1;
   padding-top: 50vh;
   color: #CF656F;
+}
+
+.nav-left{
+  background-color: #181621;
+  height: 100vh;
+  width: 250px;
+  top: 0;
+  position: absolute;
+  z-index: -1;
+  text-align: center;
+  padding-top: 10px;
+  color: #FFF;
+}
+
+.main-content{
+  background-color: #FAFAFA;
+  position: absolute;
+  padding-left: 250px;
+  height: 100%;
+  width: 100%;
+  z-index: -100;
+}
+
+.nav-pic{
+  height: 100px;
+  border: 3px solid #fff;
+  display: block;
+  margin: auto;
+}
+
+.nav-line {
+  display: block;
+}
+
+.nav-top {
+  background-color: #23212E;
+}
+
+.nav-bottom {
+  text-align: left;
+  color: #777;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #777;
+  text-align: center;
+  margin: 50%;
+}
+
+.search-input {
+  color: #777;
+}
+
+.search-input:focus{
+    outline: none;
+    color: #888;
+}
+
+.logout-btn{
+  margin: 20px 0 20px 0;
+  width: 150px;
+}
+
+.job-card{
+  width: 75%;
+  margin: auto;
+  margin-top: 10%;
+  border-radius: 15px;
+  background-color: #E2E2E2;
+}
+
+.card-text {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.action-btn {
+  width: 100px;
 }
