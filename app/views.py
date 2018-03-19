@@ -8,3 +8,7 @@ def login():
 @app.route('/jobs')
 def jobs():
     return render_template('jobs.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
