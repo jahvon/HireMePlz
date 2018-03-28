@@ -26,6 +26,6 @@ def initdb_command():
     db.create_all()
 
     # Create Users
-    models.insertApplicant(None, "jahvon", "123456", "jmd179@pitt.edu", "Introduction", "experience", "education", "skills")
+    models.insertApplicant("jahvon", "123456", "jmd179@pitt.edu", "Introduction", "experience", "education", "skills", "achievements")
 
     db.session.commit()

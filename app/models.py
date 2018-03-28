@@ -44,8 +44,8 @@ class Employers(db.Model):
     email = db.Column(db.String(80), unique = False, nullable = False)
     description = db.Column(db.String(80), unique = False, nullable = False)
 
-    listings = db.relationship('Listings', backref = 'employers', lazy = True)
-    applications = db.relationship('Applications', backref = 'employers', lazy = True)
+    listings = db.relationship('Listings', backref = 'employer_listings', lazy = True)
+    applications = db.relationship('Applications', backref = 'employer_applications', lazy = True)
 
 
 
@@ -62,7 +62,7 @@ class Listings(db.Model):
     name = db.Column(db.String(80), nullable = False)
     description = db.Column(db.String(500), nullable = False)
 
-    applications = db.relationship('Applications', backref = 'employers', lazy = True)
+    applications = db.relationship('Applications', backref = 'listing_applications', lazy = True)
 
 class Applications(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -77,10 +77,11 @@ class Applications(db.Model):
 
 ##INSERT METHODS##
 
-def insertApplicant(id, username, password, email, introduction, experience, education, skills):
+def insertApplicant(username, password, email, introduction, experience, education, skills, achievements):
 
-    new_applicant = Applicants(id=id, username=username, password=password, email=email, introduction=introduction,
-            experience=experience, education=education, skills=skills)
+    new_applicant = Applicants( username=username, password=password, email=email,
+            introduction=introduction, experience=experience, education=education, skills=skills,
+            achievements = achievements)
     db.session.add(new_applicant)
     db.session.commit()
 
