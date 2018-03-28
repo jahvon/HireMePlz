@@ -6,5 +6,6 @@
 * Start up your virtual environment, [instructions here](http://flask.pocoo.org/docs/0.12/installation/)
 2. Install dependencies with ` pip install -r requirements.txt `
 3. Set up Flask with ` export FLASK_APP=run.py `
-4. Run the program application with ` flask run `
+4. Initialize the SQL Lite database with ` flask initdb `
+5. Run the program application with ` flask run `
 6. Visit the localhost destination outputted to the terminal
