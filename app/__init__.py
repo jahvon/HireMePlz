@@ -5,6 +5,10 @@ app = Flask(__name__)
 from app import views, models
 
 db = models.db
+Employer = models.Employers
+Applicants = models.Applicants
+Listings = models.Listings
+Applications = models.Applications
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
@@ -20,5 +24,8 @@ db.init_app(app)
 def initdb_command():
     db.drop_all()
     db.create_all()
+
+    # Create Users
+    models.insertApplicant(None, "jahvon", "123456", "jmd179@pitt.edu", "Introduction", "experience", "education", "skills")
 
     db.session.commit()

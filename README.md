@@ -7,5 +7,6 @@
 2. Install dependencies with ` pip install -r requirements.txt `
 3. Set up Flask with ` export FLASK_APP=run.py `
 4. Initialize the SQL Lite database with ` flask initdb `
+* ONLY DO THIS IF THE DATABASE DOES NOT EXIST ALREADY!
 5. Run the program application with ` flask run `
 6. Visit the localhost destination outputted to the terminal

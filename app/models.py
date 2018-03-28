@@ -79,8 +79,8 @@ class Applications(db.Model):
 
 def insertApplicant(id, username, password, email, introduction, experience, education, skills):
 
-    new_applicant = Applicants(id, username, password, email, introduction,
-            experience, education, skills)
+    new_applicant = Applicants(id=id, username=username, password=password, email=email, introduction=introduction,
+            experience=experience, education=education, skills=skills)
     db.session.add(new_applicant)
     db.session.commit()
 
