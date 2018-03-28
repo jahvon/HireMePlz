@@ -59,7 +59,7 @@ class Employers(db.Model):
 ##Has a value (ID, in this case) used as a foreign key in Applications
 class Listings(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    emp_ID = db.Column(db.Integer, primary_key = True, db.ForeignKey('employers.id'),
+    emp_ID = db.Column(db.Integer, db.ForeignKey('employers.id'), primary_key = True,
             nullable = False)
     name = db.Column(db.String(80), nullable = False)
     description = db.Column(db.String(500), nullable = False)
@@ -68,12 +68,12 @@ class Listings(db.Model):
 
 class Applications(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    applicant_ID = db.Column(db.Integer, primary_key = True, db.ForeignKey('applicant.id'),
-            nullable = false)
-    listing_ID = db.Column(db.Integer, primary_key = True, db.ForeignKey('listings.id'),
-            nullable = false)
-    employer_ID = db.Column(db.Integer, primary_key = True, db.ForeignKey('employers.id'),
-            nullable = false)
+    applicant_ID = db.Column(db.Integer, db.ForeignKey('applicant.id'),
+            primary_key = True, nullable = False)
+    listing_ID = db.Column(db.Integer, db.ForeignKey('listings.id'), primary_key = True,
+            nullable = False)
+    employer_ID = db.Column(db.Integer, db.ForeignKey('employers.id'), 
+            primary_key = True, nullable = False)
 
 
 
