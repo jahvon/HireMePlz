@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect
+import os
 
 app = Flask(__name__)
-
 from app import views, models
-from models import db, Applicants, Employers, Listings, Applications
+
+db = models.db
 
 # Load default config and override config from an environment variable
 app.config.update(dict(

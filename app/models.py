@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
 ##Applicant Profile Information
@@ -66,11 +66,11 @@ class Listings(db.Model):
 
 class Applications(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    applicant_ID = db.Column(db.Integer, db.ForeignKey('applicant.id'),
+    applicant_ID = db.Column(db.Integer, db.ForeignKey('applicants.id'),
             primary_key = True, nullable = False)
     listing_ID = db.Column(db.Integer, db.ForeignKey('listings.id'), primary_key = True,
             nullable = False)
-    employer_ID = db.Column(db.Integer, db.ForeignKey('employers.id'), 
+    employer_ID = db.Column(db.Integer, db.ForeignKey('employers.id'),
             primary_key = True, nullable = False)
 
 
