@@ -64,6 +64,7 @@ def jobs():
 def applications():
     return render_template('jobs.html')
 
+<<<<<<< HEAD
 @app.route('/profile/<userid>')
 def profile(userid):
     user = models.Applicants.query.filter_by(id=userid).first()
@@ -71,3 +72,12 @@ def profile(userid):
         return redirect(url_for("home"))
     else:
         return render_template('profile.html', user=user)
+=======
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/registration')
+def registration():
+    return render_template('registration.html')
+>>>>>>> 0c77e44585d6bbb68480067f2634ed34a8ff92b4
