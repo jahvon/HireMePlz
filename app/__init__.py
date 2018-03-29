@@ -22,10 +22,12 @@ db.init_app(app)
 
 @app.cli.command('initdb')
 def initdb_command():
-    db.drop_all()
-    db.create_all()
+	db.drop_all()
+	db.create_all()
 
-    # Create Users
-    models.insertApplicant("jahvon", "123456", "jmd179@pitt.edu", "Introduction", "experience", "education", "skills", "achievements")
+	models.insertApplicant("jahvon", "123456", "jmd179@pitt.edu", "Introduction", "experience", "education", "skills", "achievements")
+	models.insertEmployer("University of Pittsburgh", "123456", "pitt@pitt.edu", "description")
+	models.insertListing(1, "Software engineer", "description")
+	models.insertApplication(1, 1, 1)
 
-    db.session.commit()
+	db.session.commit()

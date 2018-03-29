@@ -10,9 +10,9 @@
   <div class="nav-left">
     <div class="nav-top">
       <img src="{{ url_for('static', filename='placeholder.png') }}" class="nav-pic rounded-circle">
-      <span class="nav-line"><b>Your Name here</b></span>
-      <span class="nav-line"># Applications Submitted</span>
-      <button type="button" class="btn btn-light logout-btn">Logout</button>
+      <span class="nav-line"><b>{{session['username']|upper}}</b></span>
+      <span class="nav-line">{{numApps}} Applications Submitted</span>
+      <a href="/logout"><button type="button" class="btn btn-light logout-btn">Logout</button></a>
     </div>
     <div class="nav-bottom">
       <form>
@@ -25,22 +25,28 @@
           </div>
         </div>
       </form>
-
-      <b>FILTER RESULTS<b>
     </div>
   </div>
 
   <div class="main-content">
-    <div class="card job-card">
-      <div class="card-body">
-        <h5 class="card-title">Software Engineering</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Some Company | Pittsburgh, PA | Posted 3 Days ago</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis tellus a sapien semper maximus ut quis nisl. Vivamus eget lorem magna. Cras semper massa non libero porta tempus in vitae metus. Aliquam erat volutpat. Sed tincidunt cursus eros ac rhoncus. Nullam porta dui at dictum bibendum. Ut accumsan maximus aliquet. Nulla pulvinar, risus vitae auctor accumsan, nulla leo pharetra augue, sed molestie arcu nulla sit amet nisi. Etiam in scelerisque nibh. Curabitur placerat turpis vitae enim imperdiet fringilla. Cras purus sapien, porta eget justo tempus, porta vehicula dolor. Integer sollicitudin enim eu turpis lobortis accumsan. Donec sodales, nulla eu sodales accumsan, lacus magna sagittis lorem, tristique tincidunt nisl tellus vel eros. Morbi sodales sem sit amet posuere feugiat. Nullam vitae efficitur lectus. Integer ipsum metus, dignissim non erat eget, condimentum elementum magna.</p>
-        <button type="button" class="btn btn-success card-link action-btn">Apply</button>
-        <a href="#" class="card-link">More Details</a>
-        <button type="button" class="btn btn-danger card-link float-right action-btn">Skip</button>
+    {% if not jobs %}
+      <div class="job-card">
+        <b>No open job postings currently.</b>
       </div>
-    </div>
+    {% else %}
+      {% for job in jobs %}
+        <div class="card job-card">
+          <div class="card-body">
+            <h5 class="card-title">{{job.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Some Company | Pittsburgh, PA | Posted 3 Days ago</h6>
+            <p class="card-text">{{job.description}}</p>
+            <button type="button" class="btn btn-success card-link action-btn">Apply</button>
+            <a href="#" class="card-link">More Details</a>
+            <button type="button" class="btn btn-danger card-link float-right action-btn">Skip</button>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
   </div>
 </div>
 {% endblock %}

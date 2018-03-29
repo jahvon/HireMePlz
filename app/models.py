@@ -57,8 +57,7 @@ class Employers(db.Model):
 ##Has a value (ID, in this case) used as a foreign key in Applications
 class Listings(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    emp_ID = db.Column(db.Integer, db.ForeignKey('employers.id'), primary_key = True,
-            nullable = False)
+    emp_ID = db.Column(db.Integer, db.ForeignKey('employers.id'), nullable = False)
     name = db.Column(db.String(80), nullable = False)
     description = db.Column(db.String(500), nullable = False)
 
@@ -66,12 +65,9 @@ class Listings(db.Model):
 
 class Applications(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    applicant_ID = db.Column(db.Integer, db.ForeignKey('applicants.id'),
-            primary_key = True, nullable = False)
-    listing_ID = db.Column(db.Integer, db.ForeignKey('listings.id'), primary_key = True,
-            nullable = False)
-    employer_ID = db.Column(db.Integer, db.ForeignKey('employers.id'),
-            primary_key = True, nullable = False)
+    applicant_ID = db.Column(db.Integer, db.ForeignKey('applicants.id'), nullable = False)
+    listing_ID = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable = False)
+    employer_ID = db.Column(db.Integer, db.ForeignKey('employers.id'), nullable = False)
 
 
 
@@ -85,22 +81,22 @@ def insertApplicant(username, password, email, introduction, experience, educati
     db.session.add(new_applicant)
     db.session.commit()
 
-def insertEmployer(id, name, password, email, description):
+def insertEmployer(name, password, email, description):
 
-    new_employer = Employers(id, name, password, email, description)
+    new_employer = Employers(name=name, password=password, email=email, description=description)
     db.session.add(new_employer)
     db.session.commit()
 
-def insertListing(id, emp_ID, name, description):
+def insertListing(emp_ID, name, description):
 
-    new_listing = Listings(id, emp_ID, name, description)
+    new_listing = Listings(emp_ID=emp_ID, name=name, description=description)
     db.session.add(new_listing)
     db.session.commit()
 
-def insertApplication(id, applicant_ID, listing_ID, employer_ID):
+def insertApplication(applicant_ID, listing_ID, employer_ID):
 
-    new_application = Applications(id, applicant_ID, listing_ID, employer_ID)
-    db.session.add(new_listing)
+    new_application = Applications(applicant_ID=applicant_ID, listing_ID=listing_ID, employer_ID=employer_ID)
+    db.session.add(new_application)
     db.session.commit()
 
 ##QUERY METHODS##
