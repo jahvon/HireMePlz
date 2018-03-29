@@ -34,28 +34,31 @@
       <div class="card-body">
         <h3 class="card-title">{{user.username|capitalize}}'s Qualification Profile</h3>
         <table class="table">
+          {% if error %}<div class="alert alert-danger" role="alert"><strong>Error:</strong> {{ error }}</div>{% endif %}
+          <form action="" method="post">
           <tbody>
             <tr>
               <th scope="row">About Me</th>
-              <td>{{user.introduction}}</td>
+              <td><textarea class="form-control" id="introfield" name="introduction" rows="3">{{user.introduction}}</textarea></td>
             </tr>
             <tr>
               <th scope="row">Achievements</th>
-              <td>{{user.achievements}}</td>
+              <td><textarea class="form-control" id="achievfield" name="achievements" rows="3">{{user.achievements}}</textarea></td>
             </tr>
             <tr>
               <th scope="row">Skills</th>
-              <td>{{user.skills}}</td>
+              <td><textarea class="form-control" id="skillsfield" name="skills" rows="3">{{user.skills}}</textarea></td>
             </tr>
             <tr>
               <th scope="row">Education</th>
-              <td>{{user.education}}</td>
+              <td><textarea class="form-control" id="edufield" name="education" rows="3">{{user.education}}</textarea></td>
             </tr>
             <tr>
               <th scope="row">Work Experience</th>
-              <td>{{user.experience}}</td>
+              <td><textarea class="form-control" id="expfield" name="experience" rows="3">{{user.experience}}</textarea></td>
             </tr>
           </tbody>
+          </form>
         </table>
         {% if user.id == session['userid'] %}
           <a href="/editprofile"><button type="button" class="btn btn-default card-link float-right action-btn">Edit Profile</button></a>

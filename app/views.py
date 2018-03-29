@@ -41,7 +41,30 @@ def logout():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("login.html")
+    if request.method == "POST":
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        password_conf = request.form['conf_password']
+        accType = request.form['accType']
+        about = request.form['about']
+        if models.Employers.query.filter_by(email=email).first() or models.Applicants.query.filter_by(email=email).first():
+            error = "Email is taken"
+            return render_template("registration.html", error=error)
+        elif password != password_conf:
+            error = "Passwords does not match"
+            return render_template("registration.html", error=error)
+        else:
+            if accType == "Employer":
+                models.insertEmployer(name=name, password=password, email=email, description=about)
+            elif accType == "Applicant":
+                models.insertApplicant(username=name, password=password, email=email,
+                        introduction=about, experience="", education="", skills="",
+                        achievements = "")
+            info = request.form['name']+", your account has been created. You can log in now."
+            return render_template("registration.html", info=info)
+    else:
+        return render_template("registration.html")
 
 @app.route('/home')
 def home():
@@ -64,7 +87,6 @@ def jobs():
 def applications():
     return render_template('jobs.html')
 
-<<<<<<< HEAD
 @app.route('/profile/<userid>')
 def profile(userid):
     user = models.Applicants.query.filter_by(id=userid).first()
@@ -72,12 +94,11 @@ def profile(userid):
         return redirect(url_for("home"))
     else:
         return render_template('profile.html', user=user)
-=======
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
 
-@app.route('/registration')
-def registration():
-    return render_template('registration.html')
->>>>>>> 0c77e44585d6bbb68480067f2634ed34a8ff92b4
+@app.route('/editprofile', methods=["GET", "POST"])
+def editprofile():
+    if session["usertype"] == "Employer":
+        return redirect(url_for("home"))
+    else:
+        user = models.Applicants.query.filter_by(id=session['userid']).first()
+        return render_template('editprofile.html', user=user)

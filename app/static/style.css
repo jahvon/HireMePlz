@@ -27,8 +27,15 @@ body {
   right: 0;
   position: absolute;
   z-index: -1;
-  padding-top: 50vh;
   color: #CF656F;
+}
+
+.login-form{
+    padding-top: 50vh;
+}
+
+.register-form{
+  padding-top: 20vh;
 }
 
 .nav-left{
