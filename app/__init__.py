@@ -28,6 +28,9 @@ def initdb_command():
 	models.insertApplicant("jahvon", "123456", "jmd179@pitt.edu", "Introduction", "experience", "education", "skills", "achievements")
 	models.insertEmployer("University of Pittsburgh", "123456", "pitt@pitt.edu", "description")
 	models.insertListing(1, "Software engineer", "description")
+        models.insertListing(1, "QA Tester", "description")
+        models.insertListing(1, "Project Manager", "description")
+        models.insertListing(1, "Software Development Intern")
 	models.insertApplication(1, 1, 1)
 
 	db.session.commit()
