@@ -16,3 +16,7 @@ def jobs():
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
+@app.route('registration')
+def registration():
+    return render_template('registration.html')
