@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -59,6 +60,9 @@ class Listings(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     emp_ID = db.Column(db.Integer, db.ForeignKey('employers.id'), nullable = False)
     name = db.Column(db.String(80), nullable = False)
+    location = db.Column(db.String(80), nullable = False)
+    employer = db.Column(db.String(80), nullable = False)
+    posted = db.Column(db.DateTime, nullable=False,default=datetime.now())
     description = db.Column(db.String(500), nullable = False)
 
     applications = db.relationship('Applications', backref = 'listing_applications', lazy = True)
@@ -68,8 +72,12 @@ class Applications(db.Model):
     applicant_ID = db.Column(db.Integer, db.ForeignKey('applicants.id'), nullable = False)
     listing_ID = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable = False)
     employer_ID = db.Column(db.Integer, db.ForeignKey('employers.id'), nullable = False)
+    status = db.Column(db.String(80), nullable = False, default="Received")
 
-
+class Skipped(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    applicant_ID = db.Column(db.Integer, db.ForeignKey('applicants.id'), nullable = False)
+    listing_ID = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable = False)
 
 ##INSERT METHODS##
 
@@ -87,9 +95,9 @@ def insertEmployer(name, password, email, description):
     db.session.add(new_employer)
     db.session.commit()
 
-def insertListing(emp_ID, name, description):
+def insertListing(emp_ID, name, description, employer_name, location):
 
-    new_listing = Listings(emp_ID=emp_ID, name=name, description=description)
+    new_listing = Listings(emp_ID=emp_ID, name=name, description=description, employer=employer_name, location=location)
     db.session.add(new_listing)
     db.session.commit()
 
@@ -97,6 +105,12 @@ def insertApplication(applicant_ID, listing_ID, employer_ID):
 
     new_application = Applications(applicant_ID=applicant_ID, listing_ID=listing_ID, employer_ID=employer_ID)
     db.session.add(new_application)
+    db.session.commit()
+
+def insertSkipped(applicant_ID, listing_ID):
+
+    new_skip = Skipped(applicant_ID=applicant_ID, listing_ID=listing_ID)
+    db.session.add(new_skip)
     db.session.commit()
 
 ##QUERY METHODS##

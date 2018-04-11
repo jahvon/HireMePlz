@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+    {% block title %}Your Job Listings{% endblock %}
+    {% block head %}
+      {{ super() }}
+    {% endblock %}
+
+    {% block content %}
+
+    <div class="main-container">
+      <div class="nav-left">
+        <div class="nav-top">
+          <img src="{{ url_for('static', filename='placeholder.png') }}" class="nav-pic rounded-circle">
+          <span class="nav-line"><b>{{session['username']|upper}}</b></span>
+          <span class="nav-line">{{numApps}} Applications Posted</span>
+          <a href="/logout"><button type="button" class="btn btn-light logout-btn">Logout</button></a>
+        </div>
+        <div class="nav-bottom">
+          <form>
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <span class="oi oi-magnifying-glass search-icon" title="magnifying glass" aria-hidden="true"></span>
+              </div>
+              <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext search-input" id="searchBox" placeholder="Search">
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="card profile-card">
+          <div class="card-body">
+            <h3 class="card-title">{{session['username']|capitalize}}'s Job Postings</h3>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>Job ID</th>
+                  <th>Job title</th>
+                  <th>Posted</th>
+                  <th>Job Status</th>
+                  <th>Number of Applicants</th>
+                </tr>
+                {% for job in listings %}
+                  <tr>
+                    <td>{{job.id}}</td>
+                    <td>{{job.name}}</td>
+                    <td>{{job.posted|timesince}}</td>
+                    <td>Open</td>
+                    <td><a href="/applicants/{{job.id}}">1</a></td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+              </form>
+            </table>
+            <a href="/newposting"><button type="button" class="btn btn-default card-link float-right action-btn">New Job</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}

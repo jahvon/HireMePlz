@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+    {% block title %}Job Applicants{% endblock %}
+    {% block head %}
+      {{ super() }}
+    {% endblock %}
+
+    {% block content %}
+
+    <div class="main-container">
+      <div class="nav-left">
+        <div class="nav-top">
+          <img src="{{ url_for('static', filename='placeholder.png') }}" class="nav-pic rounded-circle">
+          <span class="nav-line"><b>{{session['username']|upper}}</b></span>
+          <span class="nav-line">{{numApps}} Applications Posted</span>
+          <a href="/logout"><button type="button" class="btn btn-light logout-btn">Logout</button></a>
+        </div>
+        <div class="nav-bottom">
+          <form>
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <span class="oi oi-magnifying-glass search-icon" title="magnifying glass" aria-hidden="true"></span>
+              </div>
+              <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext search-input" id="searchBox" placeholder="Search">
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="card profile-card">
+          <div class="card-body">
+            <h3 class="card-title">{{application.name|capitalize}}'s Applicants</h3>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>Applicant Number</th>
+                  <th>Profile</th>
+                  <th>Action</th>
+                </tr>
+                {% for person in applicants %}
+                  <tr>
+                    <td>{{person.id}}</td>
+                    <td><a href="/profile/{{person.id}}">View Profile</a></td>
+                    <td><a href="#">Accept</a> | <a href="#">Reject</a></td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+              </form>
+            </table>
+            <a href="/newposting"><button type="button" class="btn btn-default card-link float-right action-btn">Close Posting</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}

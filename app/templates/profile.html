@@ -11,7 +11,8 @@
     <div class="nav-top">
       <img src="{{ url_for('static', filename='placeholder.png') }}" class="nav-pic rounded-circle">
       <span class="nav-line"><b>{{session['username']|upper}}</b></span>
-      <span class="nav-line"># Applications Submitted</span>
+      <span class="nav-line">{{numApps}} Applications Submitted</span>
+      <span class="nav-line"><a href="/">Return to the homepage</a></span>
       <a href="/logout"><button type="button" class="btn btn-light logout-btn">Logout</button></a>
     </div>
     <div class="nav-bottom">
@@ -57,7 +58,7 @@
             </tr>
           </tbody>
         </table>
-        {% if user.id == session['userid'] %}
+        {% if user.id == session['userid'] and session['usertype'] != "Employer" %}
           <a href="/editprofile"><button type="button" class="btn btn-default card-link float-right action-btn">Edit Profile</button></a>
         {% endif %}
       </div>

@@ -27,10 +27,10 @@ def initdb_command():
 
 	models.insertApplicant("jahvon", "123456", "jmd179@pitt.edu", "Introduction", "experience", "education", "skills", "achievements")
 	models.insertEmployer("University of Pittsburgh", "123456", "pitt@pitt.edu", "description")
-	models.insertListing(1, "Software engineer", "description")
-        models.insertListing(1, "QA Tester", "description")
-        models.insertListing(1, "Project Manager", "description")
-        models.insertListing(1, "Software Development Intern")
+	models.insertListing(1, "Software engineer", "description", "Myspace", "Pittsburgh, PA")
+	models.insertListing(1, "QA Tester", "description", "University of Pittsburgh", "Pittsburgh, PA")
+	models.insertListing(1, "Project Manager", "description", "Neopets", "Pittsburgh, PA")
+	models.insertListing(1, "Software Development Intern", "description", "Club Penguin", "Pittsburgh, PA")
 	models.insertApplication(1, 1, 1)
 
 	db.session.commit()

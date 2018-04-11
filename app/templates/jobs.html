@@ -12,6 +12,7 @@
       <img src="{{ url_for('static', filename='placeholder.png') }}" class="nav-pic rounded-circle">
       <span class="nav-line"><b>{{session['username']|upper}}</b></span>
       <span class="nav-line">{{numApps}} Applications Submitted</span>
+      <span class="nav-line"><a href="/profile/{{session['userid']}}">Your Profile</a></span>
       <a href="/logout"><button type="button" class="btn btn-light logout-btn">Logout</button></a>
     </div>
     <div class="nav-bottom">
@@ -29,23 +30,20 @@
   </div>
 
   <div class="main-content">
-    {% if not jobs %}
+    {% if not job %}
       <div class="job-card">
         <b>No open job postings currently.</b>
       </div>
     {% else %}
-      {% for job in jobs %}
         <div class="card job-card">
           <div class="card-body">
-            <h5 class="card-title">{{job.name}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Some Company | Pittsburgh, PA | Posted 3 Days ago</h6>
+            <h5 class="card-title">{{job.name|upper}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{job.employer}} | {{job.location}} | Posted {{job.posted|timesince}}</h6>
             <p class="card-text">{{job.description}}</p>
-            <button type="button" class="btn btn-success card-link action-btn">Apply</button>
-            <a href="#" class="card-link">More Details</a>
-            <button type="button" class="btn btn-danger card-link float-right action-btn">Skip</button>
+            <a href="/apply/{{job.id}}"><button type="button" class="btn btn-success card-link action-btn">Apply</button></a>
+            <a href="/skip/{{job.id}}"><button type="button" class="btn btn-danger card-link float-right action-btn">Skip</button></a>
           </div>
         </div>
-      {% endfor %}
     {% endif %}
   </div>
 </div>
