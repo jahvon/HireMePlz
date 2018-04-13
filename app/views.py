@@ -89,18 +89,28 @@ def home():
 
 @app.route('/jobs', methods=["GET", "POST"])
 def jobs():
-	appliedApps = models.Applications.query.filter_by(applicant_ID=session['userid'])
-	skippedApps = models.Skipped.query.filter_by(applicant_ID=session['userid'])
-	numApps = appliedApps.count()
-	job = models.Listings.query.order_by(models.Listings.id).first()
-	curID = job.id
-	while(appliedApps.filter_by(listing_ID=job.id).count()>0 or skippedApps.filter_by(listing_ID=job.id).count()>0):
-		curID = curID+1
-		job = models.Listings.query.filter(models.Listings.id > curID).order_by(models.Listings.id).first()
-		if (job==None):
-			break
+    if request.method == "POST":
+        search = request.form['search']
+        session["search"] = search
+    appliedApps = models.Applications.query.filter_by(applicant_ID=session['userid'])
+    skippedApps = models.Skipped.query.filter_by(applicant_ID=session['userid'])
+    numApps = appliedApps.count()
+    if "search" in session:
+        job = models.Listings.query.filter(models.Listings.name.contains(session["search"])).order_by(models.Listings.id).first()
+    else:
+        job = models.Listings.query.order_by(models.Listings.id).first()
 
-	return render_template('jobs.html', numApps=numApps, job=job)
+    if job:
+        curID = job.id
+    else:
+        curID = None
+    while(curID is not None and (appliedApps.filter_by(listing_ID=job.id).count()>0 or skippedApps.filter_by(listing_ID=job.id).count()>0)):
+        curID = curID+1
+        job = models.Listings.query.filter(models.Listings.id > curID).order_by(models.Listings.id).first()
+        if (job==None):
+            break
+
+    return render_template('jobs.html', numApps=numApps, job=job)
 
 
 @app.route('/applications')
@@ -170,6 +180,11 @@ def skipJob(jobid):
     job = models.Skipped.query.filter_by(id=jobid).first()
     models.insertSkipped(applicant_ID=int(
         session['userid']), listing_ID=int(jobid))
+    return redirect(url_for("jobs"))
+
+@app.route('/deletetags')
+def deleteTags():
+    session.pop('search', None)
     return redirect(url_for("jobs"))
 
 @app.template_filter()

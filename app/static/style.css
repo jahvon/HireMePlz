@@ -79,6 +79,20 @@ body {
   color: #777;
 }
 
+.search-tag{
+  margin-left: 10px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.search-form{
+  margin-bottom: 0px;
+}
+
+.badge{
+  padding: 5px;
+}
+
 .search-icon {
   font-size: 18px;
   color: #777;
